@@ -1,0 +1,3 @@
+# StormPaste
+
+Record clipboard data
