@@ -11,8 +11,14 @@ import {onMounted, onUnmounted, ref} from "vue";
 import Card from "./components/Card.vue";
 import IconClose from "./components/icons/IconClose.vue";
 
+interface Item {
+  type: number,
+  value: string,
+  date: Date
+}
+
 let optStatus = ref(0)
-let pasteItems = ref([])
+let pasteItems = ref<Array<Item>>([])
 let tauriTextUnlisten: UnlistenFn;
 let tauriImageUnlisten: UnlistenFn;
 let textUnlisten: () => void;
@@ -29,7 +35,7 @@ const startListening = async () => {
     pasteItems.value.push({
       type: 1,
       value: (event.payload as any).value,
-      date: new Date()
+      date: new Date(),
     })
   });
   tauriImageUnlisten = await listen(IMAGE_CHANGED, (event) => {
